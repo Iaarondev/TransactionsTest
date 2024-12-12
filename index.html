@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="8; url='home.html'" />
     <title>Negroar Resilient - Welcome</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Italianno&family=Montserrat:wght@300&display=swap">
     <style>
@@ -23,6 +22,7 @@
             font-family: 'Cormorant Garamond', serif;
             overflow: hidden;
             perspective: 1000px;
+            background: radial-gradient(circle at center, #1a1208 0%, #000 100%);
         }
 
         .video-container {
@@ -32,6 +32,8 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            opacity: 0;
+            animation: videoFade 1s ease-out 2.3s forwards;
         }
 
         video {
@@ -61,6 +63,21 @@
             transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
             box-shadow: 0 0 20px rgba(218, 165, 32, 0.2);
             z-index: 90;
+        }
+
+        .curtain::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(218, 165, 32, 0.05) 2px,
+                rgba(218, 165, 32, 0.05) 4px
+            );
         }
 
         .curtain-left {
@@ -93,6 +110,18 @@
             animation: revealWelcome 1.5s ease-out 1.8s forwards;
             text-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
             position: relative;
+        }
+
+        .welcome::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #DAA520, transparent);
+            animation: lineExpand 1.5s ease-out 2.3s forwards;
         }
 
         .main-title {
@@ -144,43 +173,36 @@
             transform: scale(1.05);
         }
 
-        @keyframes initialFade {
-            0% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
+        .audio-control {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.3s forwards;
         }
 
-        @keyframes slideLeft {
-            to { transform: translateX(-100%) rotateY(20deg); }
+        .audio-button {
+            background-color: rgba(218, 165, 32, 0.2);
+            border: 1px solid rgba(218, 165, 32, 0.5);
+            color: #DAA520;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes slideRight {
-            to { transform: translateX(100%) rotateY(-20deg); }
-        }
-
-        @keyframes revealWelcome {
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0);
-            }
-        }
-
-        @keyframes revealTitle {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes revealSubtitle {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .audio-button:hover {
+            background-color: rgba(218, 165, 32, 0.3);
+            transform: scale(1.1);
         }
 
         .vignette {
@@ -206,6 +228,45 @@
             z-index: 3;
         }
 
+        @keyframes initialFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes videoFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideLeft {
+            to { transform: translateX(-100%) rotateY(20deg); }
+        }
+
+        @keyframes slideRight {
+            to { transform: translateX(100%) rotateY(-20deg); }
+        }
+
+        @keyframes revealWelcome {
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
+        }
+
+        @keyframes revealTitle {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes revealSubtitle {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes lineExpand {
+            to { width: 80%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @keyframes float {
             0%, 100% { 
                 opacity: 0;
@@ -226,6 +287,10 @@
             Your browser does not support the video tag.
         </video>
     </div>
+    <audio id="lion-roar" preload="auto">
+        <source src="audio/lionroar.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <div class="vignette"></div>
     <div class="curtain curtain-left"></div>
     <div class="curtain curtain-right"></div>
@@ -235,6 +300,13 @@
         <span class="subtitle">EMPOWERING INNOVATION</span>
     </div>
     <button class="skip-button" onclick="skipIntro()">Skip Intro</button>
+    <div class="audio-control">
+        <button class="audio-button" onclick="toggleAudio()" title="Toggle Sound">
+            <svg class="audio-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </button>
+    </div>
 
     <script>
         const createParticles = () => {
@@ -251,12 +323,47 @@
 
         createParticles();
 
+        const lionRoar = document.getElementById('lion-roar');
+        const video = document.getElementById('intro-video');
+        let audioPlayed = false;
+
+        // Play roar after curtain animation
+        setTimeout(() => {
+            if (!audioPlayed) {
+                lionRoar.play().catch(e => console.log('Auto-play prevented:', e));
+                audioPlayed = true;
+            }
+        }, 2300);
+
+        function toggleAudio() {
+            if (lionRoar.paused) {
+                lionRoar.play();
+            } else {
+                lionRoar.pause();
+                lionRoar.currentTime = 0;
+            }
+        }
+
         function skipIntro() {
             window.location.href = 'home.html';
         }
 
-        const video = document.getElementById('intro-video');
+        // Redirect when video ends
         video.addEventListener('ended', skipIntro);
+
+        // Handle video errors
+        video.addEventListener('error', () => {
+            console.error('Video failed to load');
+            skipIntro();
+        });
+
+        // Handle audio errors
+        lionRoar.addEventListener('error', (e) => {
+            console.error('Audio failed to load:', e);
+        });
+
+        // Auto-redirect after 8 seconds
+        setTimeout(skipIntro, 8000);
     </script>
 </body>
 </html>
