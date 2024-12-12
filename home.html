@@ -10,10 +10,17 @@
 <body>
     <header>
         <nav class="nav-container">
-            <a href="#" class="logo">
-                <span class="logo-text">Negroar Resilient Marketing</span>
-                <audio id="roarSound" src="audio/lionroar.mp3"></audio>
-            </a>
+            <div class="logo-container">
+                <a href="#" class="logo">
+                    <span class="logo-text">Negroar Resilient</span>
+                </a>
+                <button id="soundButton" class="sound-button" aria-label="Play sound">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <audio id="roarSound" preload="auto">
+                    <source src="audio/lionroar.mp3" type="audio/mpeg">
+                </audio>
+            </div>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -28,9 +35,7 @@
     </header>
 
     <section id="home" class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="videos/intro.mp4" type="video/mp4">
-        </video>
+        <div class="hero-background"></div>
         <div class="hero-content animate-on-scroll">
             <h1>Grow Your Business in Baton Rouge</h1>
             <p>Local marketing expertise. Community-driven results.</p>
@@ -89,7 +94,7 @@
                 <p>Through our extensive network of local partnerships and innovative marketing strategies, we help businesses build meaningful connections that drive sustainable growth.</p>
             </div>
             <div class="about-image animate-on-scroll">
-                <!-- Placeholder for about section image -->
+                <img src="/images/about-image.jpg" alt="Baton Rouge Business District" class="about-img">
             </div>
         </div>
     </section>
@@ -100,15 +105,16 @@
             <h3>Check Out Our Latest Videos</h3>
             <div class="video-embed">
                 <iframe
+                    title="Negroar Resilient YouTube Channel"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed?listType=user_uploads&list=UCu1X56adxE6sIbJtEo-H_Dw"
+                    data-src="https://www.youtube.com/embed?listType=user_uploads&list=UCu1X56adxE6sIbJtEo-H_Dw"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
             </div>
-            <a href="https://www.youtube.com/channel/UCu1X56adxE6sIbJtEo-H_Dw" class="cta-button" target="_blank">Visit Our Channel</a>
+            <a href="https://www.youtube.com/channel/UCu1X56adxE6sIbJtEo-H_Dw" class="cta-button" target="_blank" rel="noopener">Visit Our Channel</a>
         </div>
     </section>
 
@@ -138,10 +144,10 @@
     <footer>
         <p>&copy; 2024 Negroar Resilient Marketing | Baton Rouge, LA</p>
         <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
     </footer>
 
