@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Negroar Resilient - Welcome</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Italianno&family=Montserrat:wght@300&display=swap">
     <style>
@@ -12,16 +12,23 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             margin: 0;
-            height: 100vh;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background: #000;
             font-family: 'Cormorant Garamond', serif;
-            overflow: hidden;
-            perspective: 1000px;
+            min-height: 100vh;
+            position: relative;
             background: linear-gradient(to bottom, #1a1208 0%, #000 100%);
         }
 
@@ -97,6 +104,11 @@
             width: 100%;
             max-width: 800px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
         }
 
         .welcome {
@@ -108,6 +120,7 @@
             animation: revealWelcome 1.5s ease-out 1.8s forwards;
             text-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
             position: relative;
+            margin-bottom: 20px;
         }
 
         .main-title {
@@ -137,14 +150,19 @@
             animation: revealSubtitle 1.5s ease-out 2.8s forwards;
         }
 
-        .audio-control {
-            position: absolute;
+        .controls-container {
+            position: fixed;
             bottom: 20px;
-            left: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 20px;
             z-index: 1000;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+        }
+
+        .audio-control {
             opacity: 0;
             animation: fadeIn 1s ease-out 3.3s forwards;
         }
@@ -164,7 +182,22 @@
             justify-content: center;
         }
 
-        .audio-button:hover {
+        .enter-site {
+            background-color: rgba(218, 165, 32, 0.2);
+            border: 1px solid rgba(218, 165, 32, 0.5);
+            color: #DAA520;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.3s forwards;
+            transition: all 0.3s ease;
+        }
+
+        .audio-button:hover,
+        .enter-site:hover {
             background-color: rgba(218, 165, 32, 0.3);
             transform: scale(1.1);
         }
@@ -178,30 +211,6 @@
             background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
             pointer-events: none;
             z-index: 2;
-        }
-
-        .enter-site {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background-color: rgba(218, 165, 32, 0.2);
-            border: 1px solid rgba(218, 165, 32, 0.5);
-            color: #DAA520;
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 3.3s forwards;
-            z-index: 1000;
-            border-radius: 4px;
-        }
-
-        .enter-site:hover {
-            background-color: rgba(218, 165, 32, 0.3);
-            transform: scale(1.05);
         }
 
         @keyframes initialFade {
@@ -238,12 +247,47 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        @media (max-height: 600px) {
+            .content {
+                min-height: 40vh;
+                padding: 10px;
+            }
+
+            .controls-container {
+                bottom: 10px;
+            }
+
+            .welcome {
+                margin-bottom: 10px;
+            }
+
+            .main-title {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .controls-container {
+                padding: 0 10px;
+            }
+
+            .audio-button {
+                width: 36px;
+                height: 36px;
+            }
+
+            .enter-site {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="initial-overlay"></div>
     <div class="video-container">
-        <video id="intro-video" autoplay loop playsinline>
+        <video id="intro-video" autoplay loop playsinline muted>
             <source src="videos/intro.mp4" type="video/mp4">
         </video>
     </div>
@@ -258,101 +302,86 @@
         <div class="main-title">Negroar Resilient</div>
         <span class="subtitle">Community Driven Progress</span>
     </div>
-    <div class="audio-control">
-        <button class="audio-button" onclick="toggleAudio()" title="Toggle Sound">
-            <svg class="audio-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-            </svg>
-        </button>
+    <div class="controls-container">
+        <div class="audio-control">
+            <button class="audio-button" onclick="toggleAudio()" title="Toggle Sound">
+                <svg class="audio-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            </button>
+        </div>
+        <a href="home.html" class="enter-site">Enter Site</a>
     </div>
-    <a href="home.html" class="enter-site">Enter Site</a>
 
     <script>
-        // Initialize elements
-        const lionRoar = document.getElementById('lion-roar');
-        const video = document.getElementById('intro-video');
-        let audioPlayed = false;
+        document.addEventListener('DOMContentLoaded', function() {
+            const lionRoar = document.getElementById('lion-roar');
+            const video = document.getElementById('intro-video');
+            let audioPlayed = false;
 
-        // Function to start playing audio
-        function startAudio() {
-            if (!audioPlayed) {
-                lionRoar.volume = 0.7; // Set initial volume
-                lionRoar.play()
-                    .then(() => {
-                        audioPlayed = true;
-                        console.log('Audio started automatically');
-                    })
-                    .catch(error => {
-                        console.log('Auto-play prevented:', error);
-                        enablePlayOnInteraction();
-                    });
+            // Function to play audio
+            function playAudio() {
+                if (!audioPlayed && lionRoar.readyState >= 2) {
+                    lionRoar.volume = 0.7;
+                    const playPromise = lionRoar.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise
+                            .then(() => {
+                                audioPlayed = true;
+                                console.log('Audio played successfully');
+                            })
+                            .catch(error => {
+                                console.log('Audio autoplay blocked:', error);
+                                // Enable play on first interaction
+                                document.addEventListener('click', playAudioOnce);
+                                document.addEventListener('touchstart', playAudioOnce);
+                            });
+                    }
+                }
             }
-        }
 
-        // Enable play on first interaction
-        function enablePlayOnInteraction() {
-            const playOnce = () => {
+            // Play audio once on interaction
+            function playAudioOnce() {
                 if (!audioPlayed) {
+                    playAudio();
+                    document.removeEventListener('click', playAudioOnce);
+                    document.removeEventListener('touchstart', playAudioOnce);
+                }
+            }
+
+            // Multiple attempts to start audio
+            setTimeout(playAudio, 100);
+            setTimeout(playAudio, 500);
+            setTimeout(playAudio, 1000);
+
+            // Ensure audio is loaded
+            lionRoar.load();
+
+            // Toggle audio function
+            window.toggleAudio = function() {
+                if (lionRoar.paused) {
                     lionRoar.play()
                         .then(() => {
                             audioPlayed = true;
-                            console.log('Audio played on interaction');
                         })
-                        .catch(e => console.log('Play failed:', e));
+                        .catch(e => console.log('Toggle failed:', e));
+                } else {
+                    lionRoar.pause();
+                    lionRoar.currentTime = 0;
                 }
-                // Clean up event listeners
-                document.removeEventListener('click', playOnce);
-                document.removeEventListener('touchstart', playOnce);
             };
 
-            document.addEventListener('click', playOnce);
-            document.addEventListener('touchstart', playOnce);
-        }
+            // Handle video loop
+            video.addEventListener('ended', () => {
+                video.play().catch(e => console.log('Video loop failed:', e));
+            });
 
-        // Start audio attempts
-        function initializeAudio() {
-            startAudio();
-            // Multiple attempts with delays
-            setTimeout(startAudio, 100);
-            setTimeout(startAudio, 500);
-            setTimeout(startAudio, 1000);
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', initializeAudio);
-        window.addEventListener('load', initializeAudio);
-
-        // Toggle audio function
-        function toggleAudio() {
-            if (lionRoar.paused) {
-                lionRoar.play()
-                    .then(() => {
-                        audioPlayed = true;
-                    })
-                    .catch(e => console.log('Toggle failed:', e));
-            } else {
-                lionRoar.pause();
-                lionRoar.currentTime = 0;
-            }
-        }
-
-        // Audio error handling
-        lionRoar.addEventListener('error', (e) => {
-            console.error('Audio error:', e);
-            lionRoar.load();
+            // Redirect after 8 seconds
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 8000);
         });
-
-        // Ensure video plays and loops
-        video.addEventListener('canplay', () => {
-            video.play().catch(e => console.log('Video play failed:', e));
-        });
-
-        video.addEventListener('ended', () => {
-            video.play().catch(e => console.log('Video loop failed:', e));
-        });
-
-        // Preload audio
-        lionRoar.load();
     </script>
 </body>
 </html>
