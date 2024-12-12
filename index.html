@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Italianno&family=Montserrat:wght@300&display=swap"
     />
     <style>
+      /* All existing styles remain the same */
       * {
         margin: 0;
         padding: 0;
@@ -199,6 +200,7 @@
         opacity: 0;
         animation: fadeIn 1s ease-out 3.3s forwards;
         transition: all 0.3s ease;
+        cursor: pointer;
       }
 
       .audio-button:hover,
@@ -339,11 +341,7 @@
     </div>
     <div class="controls-container">
       <div class="audio-control">
-        <button
-          class="audio-button"
-          onclick="toggleAudio()"
-          title="Toggle Sound"
-        >
+        <button class="audio-button" onclick="toggleAudio()" title="Toggle Sound">
           <svg
             class="audio-icon"
             viewBox="0 0 24 24"
@@ -357,7 +355,7 @@
           </svg>
         </button>
       </div>
-      <a href="home.html" class="enter-site">Enter Site</a>
+      <button onclick="window.location.href='home.html'" class="enter-site">Enter Site</button>
     </div>
 
     <script>
@@ -424,11 +422,6 @@
         video.addEventListener("ended", () => {
           video.play().catch((e) => console.log("Video loop failed:", e));
         });
-
-        // Redirect after 8 seconds
-        setTimeout(() => {
-          window.location.href = "home.html";
-        }, 8000);
       });
     </script>
   </body>
