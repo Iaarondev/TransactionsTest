@@ -22,7 +22,6 @@
             font-family: 'Cormorant Garamond', serif;
             overflow: hidden;
             perspective: 1000px;
-            background: radial-gradient(circle at center, #1a1208 0%, #000 100%);
         }
 
         .video-container {
@@ -33,7 +32,7 @@
             height: 100%;
             z-index: 1;
             opacity: 0;
-            animation: videoFade 1s ease-out 2.3s forwards;
+            animation: videoFade 1s ease-out 0.5s forwards;
         }
 
         video {
@@ -112,18 +111,6 @@
             position: relative;
         }
 
-        .welcome::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #DAA520, transparent);
-            animation: lineExpand 1.5s ease-out 2.3s forwards;
-        }
-
         .main-title {
             color: #DAA520;
             font-size: clamp(36px, 8vw, 64px);
@@ -149,28 +136,6 @@
             opacity: 0;
             transform: translateY(50px);
             animation: revealSubtitle 1.5s ease-out 2.8s forwards;
-        }
-
-        .skip-button {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: rgba(218, 165, 32, 0.2);
-            border: 1px solid rgba(218, 165, 32, 0.5);
-            color: #DAA520;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 3.3s forwards;
-        }
-
-        .skip-button:hover {
-            background-color: rgba(218, 165, 32, 0.3);
-            transform: scale(1.05);
         }
 
         .audio-control {
@@ -211,21 +176,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+            background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
             pointer-events: none;
             z-index: 2;
-        }
-
-        .gold-particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #DAA520;
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: float 3s ease-in-out infinite;
-            opacity: 0;
-            z-index: 3;
         }
 
         @keyframes initialFade {
@@ -258,38 +211,44 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes lineExpand {
-            to { width: 80%; }
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        @keyframes float {
-            0%, 100% { 
-                opacity: 0;
-                transform: translateY(0) scale(1);
-            }
-            50% { 
-                opacity: 0.8;
-                transform: translateY(-20px) scale(1.2);
-            }
+        .enter-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background-color: rgba(218, 165, 32, 0.2);
+            border: 1px solid rgba(218, 165, 32, 0.5);
+            color: #DAA520;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.3s forwards;
+            z-index: 1000;
+            border-radius: 4px;
+        }
+
+        .enter-button:hover {
+            background-color: rgba(218, 165, 32, 0.3);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
     <div class="initial-overlay"></div>
     <div class="video-container">
-        <video id="intro-video" autoplay muted playsinline>
+        <video id="intro-video" autoplay muted loop playsinline>
             <source src="videos/intro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
     <audio id="lion-roar" preload="auto">
         <source src="audio/lionroar.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
     <div class="vignette"></div>
     <div class="curtain curtain-left"></div>
@@ -299,7 +258,6 @@
         <div class="main-title">Negroar Resilient</div>
         <span class="subtitle">Community Driven Progress</span>
     </div>
-    <button class="skip-button" onclick="skipIntro()">Skip Intro</button>
     <div class="audio-control">
         <button class="audio-button" onclick="toggleAudio()" title="Toggle Sound">
             <svg class="audio-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
@@ -307,63 +265,63 @@
             </svg>
         </button>
     </div>
+    <a href="home.html" class="enter-button">Enter Site</a>
 
     <script>
-        const createParticles = () => {
-            const particleCount = window.innerWidth < 768 ? 15 : 25;
-            for(let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'gold-particle';
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.top = Math.random() * 100 + 'vh';
-                particle.style.animationDelay = Math.random() * 3 + 's';
-                document.body.appendChild(particle);
-            }
-        };
-
-        createParticles();
-
         const lionRoar = document.getElementById('lion-roar');
         const video = document.getElementById('intro-video');
         let audioPlayed = false;
 
-        // Play roar after curtain animation
-        setTimeout(() => {
+        // Function to try playing audio
+        function playAudio() {
             if (!audioPlayed) {
-                lionRoar.play().catch(e => console.log('Auto-play prevented:', e));
-                audioPlayed = true;
+                const playPromise = lionRoar.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        audioPlayed = true;
+                        console.log('Audio played successfully');
+                    }).catch(error => {
+                        console.log('Autoplay prevented:', error);
+                        // Try playing again after user interaction
+                        document.addEventListener('click', () => {
+                            if (!audioPlayed) {
+                                lionRoar.play().catch(e => console.log('Audio play failed:', e));
+                                audioPlayed = true;
+                            }
+                        }, { once: true });
+                    });
+                }
             }
-        }, 2300);
+        }
 
+        // Try to play audio as soon as possible
+        window.addEventListener('load', playAudio);
+        document.addEventListener('DOMContentLoaded', playAudio);
+
+        // Backup play attempt after a short delay
+        setTimeout(playAudio, 100);
+
+        // Toggle audio function
         function toggleAudio() {
             if (lionRoar.paused) {
                 lionRoar.play();
+                audioPlayed = true;
             } else {
                 lionRoar.pause();
                 lionRoar.currentTime = 0;
             }
         }
 
-        function skipIntro() {
-            window.location.href = 'home.html';
-        }
-
-        // Redirect when video ends
-        video.addEventListener('ended', skipIntro);
-
-        // Handle video errors
-        video.addEventListener('error', () => {
-            console.error('Video failed to load');
-            skipIntro();
-        });
-
         // Handle audio errors
         lionRoar.addEventListener('error', (e) => {
             console.error('Audio failed to load:', e);
         });
 
-        // Auto-redirect after 8 seconds
-        setTimeout(skipIntro, 8000);
+        // Ensure video loops properly
+        video.addEventListener('ended', () => {
+            video.play();
+        });
     </script>
 </body>
 </html>
