@@ -3,47 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Square Transactions</title>
+    <title>Negroar Resilient - Welcome</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
-        table {
+
+        .video-container {
             width: 100%;
-            border-collapse: collapse;
+            height: 100vh;
+            position: relative;
         }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        th {
-            background-color: #f4f4f4;
+
+        .skip-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
         }
-        .error {
-            color: red;
+
+        .skip-button:hover {
+            background-color: rgba(255, 255, 255, 1);
         }
     </style>
 </head>
 <body>
-    <h1>Square Transactions</h1>
-    <button id="fetch-transactions">Fetch Transactions</button>
-    <p id="status"></p>
-    <table id="transactions-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will be populated here -->
-        </tbody>
-    </table>
+    <div class="video-container">
+        <!-- Replace 'your-video.mp4' with your actual video file path -->
+        <video id="intro-video" autoplay muted playsinline>
+            <source src="your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="skip-button" onclick="skipIntro()">Skip Intro</button>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        const video = document.getElementById('intro-video');
+        // Replace with your main page URL
+        const mainPageUrl = 'https://github.com/Iaarondev/TransactionsTest';
+
+        // Function to redirect to main page
+        function redirectToMain() {
+            window.location.href = mainPageUrl;
+        }
+
+        // Skip intro function
+        function skipIntro() {
+            redirectToMain();
+        }
+
+        // Redirect when video ends
+        video.addEventListener('ended', redirectToMain);
+    </script>
 </body>
 </html>
