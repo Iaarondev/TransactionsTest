@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Negroar Resilient Marketing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
         <nav class="nav-container">
-            <a href="#" class="logo">Negroar Resilient Marketing</a>
+            <a href="#" class="logo">
+                <span class="logo-text">Negroar Resilient Marketing</span>
+                <audio id="roarSound" src="audio/lionroar.mp3"></audio>
+            </a>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -25,6 +28,9 @@
     </header>
 
     <section id="home" class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/intro.mp4" type="video/mp4">
+        </video>
         <div class="hero-content animate-on-scroll">
             <h1>Grow Your Business in Baton Rouge</h1>
             <p>Local marketing expertise. Community-driven results.</p>
