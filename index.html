@@ -38,10 +38,47 @@
             border-radius: 5px;
             cursor: pointer;
             z-index: 1000;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
         }
 
         .skip-button:hover {
             background-color: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -54,24 +91,39 @@
         </video>
         <button class="skip-button" onclick="skipIntro()">Skip Intro</button>
     </div>
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
 
     <script>
         const video = document.getElementById('intro-video');
-        // Replace with your main page URL
-        const mainPageUrl = 'https://github.com/Iaarondev/TransactionsTest';
+        const loadingOverlay = document.querySelector('.loading-overlay');
+        // Update this path to match your home page location
+        const mainPageUrl = '/src/pages/home.html';
 
-        // Function to redirect to main page
-        function redirectToMain() {
-            window.location.href = mainPageUrl;
+        function showLoadingOverlay() {
+            loadingOverlay.classList.add('active');
         }
 
-        // Skip intro function
+        function redirectToMain() {
+            showLoadingOverlay();
+            setTimeout(() => {
+                window.location.href = mainPageUrl;
+            }, 500);
+        }
+
         function skipIntro() {
             redirectToMain();
         }
 
         // Redirect when video ends
         video.addEventListener('ended', redirectToMain);
+
+        // Handle video loading error
+        video.addEventListener('error', () => {
+            console.error('Video failed to load');
+            redirectToMain();
+        });
     </script>
 </body>
 </html>
