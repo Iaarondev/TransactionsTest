@@ -22,6 +22,7 @@
             font-family: 'Cormorant Garamond', serif;
             overflow: hidden;
             perspective: 1000px;
+            background: linear-gradient(to bottom, #1a1208 0%, #000 100%);
         }
 
         .video-container {
@@ -31,8 +32,6 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0;
-            animation: videoFade 1s ease-out 0.5s forwards;
         }
 
         video {
@@ -181,6 +180,30 @@
             z-index: 2;
         }
 
+        .enter-site {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background-color: rgba(218, 165, 32, 0.2);
+            border: 1px solid rgba(218, 165, 32, 0.5);
+            color: #DAA520;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.3s forwards;
+            z-index: 1000;
+            border-radius: 4px;
+        }
+
+        .enter-site:hover {
+            background-color: rgba(218, 165, 32, 0.3);
+            transform: scale(1.05);
+        }
+
         @keyframes initialFade {
             0% { opacity: 1; }
             100% { opacity: 0; visibility: hidden; }
@@ -215,35 +238,12 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        .enter-button {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background-color: rgba(218, 165, 32, 0.2);
-            border: 1px solid rgba(218, 165, 32, 0.5);
-            color: #DAA520;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 3.3s forwards;
-            z-index: 1000;
-            border-radius: 4px;
-        }
-
-        .enter-button:hover {
-            background-color: rgba(218, 165, 32, 0.3);
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
     <div class="initial-overlay"></div>
     <div class="video-container">
-        <video id="intro-video" autoplay muted loop playsinline>
+        <video id="intro-video" autoplay loop playsinline>
             <source src="videos/intro.mp4" type="video/mp4">
         </video>
     </div>
@@ -265,63 +265,94 @@
             </svg>
         </button>
     </div>
-    <a href="home.html" class="enter-button">Enter Site</a>
+    <a href="home.html" class="enter-site">Enter Site</a>
 
     <script>
+        // Initialize elements
         const lionRoar = document.getElementById('lion-roar');
         const video = document.getElementById('intro-video');
         let audioPlayed = false;
 
-        // Function to try playing audio
-        function playAudio() {
+        // Function to start playing audio
+        function startAudio() {
             if (!audioPlayed) {
-                const playPromise = lionRoar.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
+                lionRoar.volume = 0.7; // Set initial volume
+                lionRoar.play()
+                    .then(() => {
                         audioPlayed = true;
-                        console.log('Audio played successfully');
-                    }).catch(error => {
-                        console.log('Autoplay prevented:', error);
-                        // Try playing again after user interaction
-                        document.addEventListener('click', () => {
-                            if (!audioPlayed) {
-                                lionRoar.play().catch(e => console.log('Audio play failed:', e));
-                                audioPlayed = true;
-                            }
-                        }, { once: true });
+                        console.log('Audio started automatically');
+                    })
+                    .catch(error => {
+                        console.log('Auto-play prevented:', error);
+                        enablePlayOnInteraction();
                     });
-                }
             }
         }
 
-        // Try to play audio as soon as possible
-        window.addEventListener('load', playAudio);
-        document.addEventListener('DOMContentLoaded', playAudio);
+        // Enable play on first interaction
+        function enablePlayOnInteraction() {
+            const playOnce = () => {
+                if (!audioPlayed) {
+                    lionRoar.play()
+                        .then(() => {
+                            audioPlayed = true;
+                            console.log('Audio played on interaction');
+                        })
+                        .catch(e => console.log('Play failed:', e));
+                }
+                // Clean up event listeners
+                document.removeEventListener('click', playOnce);
+                document.removeEventListener('touchstart', playOnce);
+            };
 
-        // Backup play attempt after a short delay
-        setTimeout(playAudio, 100);
+            document.addEventListener('click', playOnce);
+            document.addEventListener('touchstart', playOnce);
+        }
+
+        // Start audio attempts
+        function initializeAudio() {
+            startAudio();
+            // Multiple attempts with delays
+            setTimeout(startAudio, 100);
+            setTimeout(startAudio, 500);
+            setTimeout(startAudio, 1000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeAudio);
+        window.addEventListener('load', initializeAudio);
 
         // Toggle audio function
         function toggleAudio() {
             if (lionRoar.paused) {
-                lionRoar.play();
-                audioPlayed = true;
+                lionRoar.play()
+                    .then(() => {
+                        audioPlayed = true;
+                    })
+                    .catch(e => console.log('Toggle failed:', e));
             } else {
                 lionRoar.pause();
                 lionRoar.currentTime = 0;
             }
         }
 
-        // Handle audio errors
+        // Audio error handling
         lionRoar.addEventListener('error', (e) => {
-            console.error('Audio failed to load:', e);
+            console.error('Audio error:', e);
+            lionRoar.load();
         });
 
-        // Ensure video loops properly
-        video.addEventListener('ended', () => {
-            video.play();
+        // Ensure video plays and loops
+        video.addEventListener('canplay', () => {
+            video.play().catch(e => console.log('Video play failed:', e));
         });
+
+        video.addEventListener('ended', () => {
+            video.play().catch(e => console.log('Video loop failed:', e));
+        });
+
+        // Preload audio
+        lionRoar.load();
     </script>
 </body>
 </html>
