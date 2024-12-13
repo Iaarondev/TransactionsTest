@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Business Intake</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-purple-600 text-white py-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">New Business Intake</h1>
+            <p class="mt-2">Submit your details to join the Negroar Resilience Program</p>
+        </div>
+    </header>
+
+    <!-- Form Section -->
+    <main class="container mx-auto px-6 py-12">
+        <section class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-semibold mb-6">Business Registration Form</h2>
+            <form id="business-intake-form" class="space-y-6">
+                <!-- Business Name -->
+                <div>
+                    <label for="business-name" class="block text-sm font-medium text-gray-700">Business Name</label>
+                    <input 
+                        type="text" 
+                        id="business-name" 
+                        name="business_name" 
+                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
+                        required>
+                </div>
+
+                <!-- Contact Name -->
+                <div>
+                    <label for="contact-name" class="block text-sm font-medium text-gray-700">Contact Person</label>
+                    <input 
+                        type="text" 
+                        id="contact-name" 
+                        name="contact_name" 
+                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
+                        required>
+                </div>
+
+                <!-- Email Address -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
+                        required>
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
+                        required>
+                </div>
+
+                <!-- Business Registration Status -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Are you a registered business?</label>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input 
+                                type="radio" 
+                                name="registered_business" 
+                                value="yes" 
+                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500" 
+                                required>
+                            <span class="ml-2 text-gray-700">Yes</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input 
+                                type="radio" 
+                                name="registered_business" 
+                                value="no" 
+                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span class="ml-2 text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Insurance Status -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Do you have business insurance?</label>
+                    <div class="mt-2 space-y-2">
+                        <label class="flex items-center">
+                            <input 
+                                type="radio" 
+                                name="insurance_status" 
+                                value="yes" 
+                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500" 
+                                required>
+                            <span class="ml-2 text-gray-700">Yes</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input 
+                                type="radio" 
+                                name="insurance_status" 
+                                value="no" 
+                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span class="ml-2 text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div>
+                    <label for="additional-details" class="block text-sm font-medium text-gray-700">Additional Information</label>
+                    <textarea 
+                        id="additional-details" 
+                        name="additional_details" 
+                        rows="4" 
+                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                        placeholder="Tell us more about your business, needs, and goals."
+                        required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button 
+                        type="submit" 
+                        class="w-full bg-purple-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                        Submit Application
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-4 text-center">
+            <p>&copy; <span id="year"></span> Negroar Resilience. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamically update the year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Form submission handling
+        document.getElementById('business-intake-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for submitting your application. We will review your details and get back to you soon.');
+            this.reset(); // Reset form fields
+        });
+    </script>
+</body>
+</html>
