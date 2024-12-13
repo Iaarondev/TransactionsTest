@@ -6,35 +6,8 @@
     <title>Negroar Resilience</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Video Background Styles */
-        .video-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 100vh;
-        }
-        .video-container video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 0;
-            object-fit: cover;
-        }
-        .video-content {
-            position: relative;
-            z-index: 1;
-            background: rgba(76, 29, 149, 0.7);
-            height: 100%;
-        }
-        
-        /* General Styles */
-        .gradient-bg {
-            background: linear-gradient(to right, #4C1D95, #1E40AF);
+        body {
+            background-color: #f9fafb;
         }
         .card {
             transition: transform 0.2s;
@@ -42,246 +15,110 @@
         .card:hover {
             transform: translateY(-5px);
         }
-        .form-input:focus {
-            outline: 2px solid #6D28D9;
-            outline-offset: 2px;
-        }
-        
-        /* YouTube Section Styles */
-        .youtube-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-        .youtube-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 0.5rem;
-        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
-    <!-- Hero Section with Video Background -->
-    <header class="video-container">
-        <video autoplay muted loop playsinline>
-            <source src="videos/intro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="video-content flex items-center justify-center">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">Welcome to Negroar Resilience</h1>
-                <p class="text-xl md:text-2xl max-w-2xl mx-auto text-white">
-                    Empowering and uplifting the Negro community in Baton Rouge through food service entrepreneurship.
-                </p>
-            </div>
+    <!-- Header -->
+    <header class="video-container bg-purple-600 text-white py-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Negroar Resilience</h1>
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto">
+                Empowering and uplifting the Negro community in Baton Rouge through food service entrepreneurship.
+            </p>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
-        <!-- YouTube Channel Section -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">Follow Our Journey</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h3 class="text-xl font-semibold mb-4">Latest Updates</h3>
-                    <div class="youtube-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/?listType=user_uploads&list=NegroarResilient" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h3 class="text-xl font-semibold mb-4">Join Our Community</h3>
-                    <p class="text-gray-600 mb-6">
-                        Subscribe to our YouTube channel to stay updated with our latest content, success stories, and community updates.
-                    </p>
-                    <a 
-                        href="https://www.youtube.com/@NegroarResilient" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        class="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 transition-colors"
-                    >
-                        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                        Subscribe on YouTube
-                    </a>
-                </div>
-            </div>
-        </section>
-
         <!-- About Section -->
         <section class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">About Negroar Resilience</h2>
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <p class="text-gray-600 leading-relaxed">
-                    Negroar Resilience is an initiative designed to empower individuals in the Negro community of Baton Rouge 
-                    by providing access to a professional kitchen and retail space. Our mission is to foster independence, resilience, 
-                    and success for entrepreneurs who lack the resources or certifications to start their food service businesses.
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">About Us</h2>
+            <p class="text-gray-600 leading-relaxed">
+                Negroar Resilience is an initiative to empower individuals in Baton Rouge’s Negro community 
+                by providing access to professional kitchens and retail spaces. We aim to foster independence, 
+                resilience, and entrepreneurial success.
+            </p>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Our Community</h2>
+            <div id="community-cards" class="grid md:grid-cols-3 gap-8">
+                <!-- Dynamically populated community cards -->
+            </div>
+        </section>
+
+        <!-- Join Our Business Community Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Join Our Business Community</h2>
+            <div class="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg shadow-lg p-8">
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Are you a business looking to make an impact? Join our network of businesses dedicated 
+                    to empowering the Baton Rouge community. Submit your business information, and we’ll help 
+                    you get started with the resources and connections you need to succeed.
                 </p>
-            </div>
-        </section>
-
-        <!-- Program Features -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">Our Program</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="card bg-white rounded-lg shadow-lg p-6">
-                    <div class="w-12 h-12 bg-purple-600 rounded-full mb-4 flex items-center justify-center text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Flexible Access</h3>
-                    <p class="text-gray-600">
-                        Access our professional kitchen and retail space with convenient weekly scheduling options.
-                    </p>
-                </div>
-                <div class="card bg-white rounded-lg shadow-lg p-6">
-                    <div class="w-12 h-12 bg-purple-600 rounded-full mb-4 flex items-center justify-center text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Dedicated Time Slots</h3>
-                    <p class="text-gray-600">
-                        Guaranteed time slots for your business operations, allowing focused and uninterrupted work.
-                    </p>
-                </div>
-                <div class="card bg-white rounded-lg shadow-lg p-6">
-                    <div class="w-12 h-12 bg-purple-600 rounded-full mb-4 flex items-center justify-center text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Prime Location</h3>
-                    <p class="text-gray-600">
-                        Centrally located facility in Baton Rouge, making it easily accessible to your customer base.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Commitment Section -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">Our Commitment</h2>
-            <div class="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg p-8">
-                <p class="text-gray-700 leading-relaxed">
-                    We are committed to ensuring that Negroar Resilience complies with all safety and legal standards while staying 
-                    true to its mission of empowerment. By joining forces with like-minded individuals and organizations, we aim to 
-                    cultivate a legacy of resilience and achievement for our community.
-                </p>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">Get in Touch</h2>
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                <p class="text-gray-600">[Your Phone Number]</p>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                <a href="mailto:[Your Email Address]" class="text-purple-600 hover:text-purple-800">
-                                    [Your Email Address]
-                                </a>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <p class="text-gray-600">Baton Rouge, LA</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Send us a Message</h3>
-                        <form class="space-y-4">
-                            <input
-                                type="text"
-                                placeholder="Your Name"
-                                class="w-full p-2 border border-gray-300 rounded form-input"
-                            >
-                            <input
-                                type="email"
-                                placeholder="Your Email"
-                                class="w-full p-2 border border-gray-300 rounded form-input"
-                            >
-                            <textarea
-                                placeholder="Your Message"
-                                rows="4"
-                                class="w-full p-2 border border-gray-300 rounded form-input"
-                            ></textarea>
-                            <button
-                                type="submit"
-                                class="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700 transition-colors"
-                            >
-                            Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- Footer Section -->
-<footer class="bg-gray-800 text-white">
-    <div class="container mx-auto px-6 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-            <p class="mb-4 md:mb-0">&copy; <span id="year"></span> Negroar Resilience. All rights reserved.</p>
-            <div class="flex items-center space-x-4">
                 <a 
-                    href="https://www.youtube.com/@NegroarResilient" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="text-white hover:text-red-400 transition-colors"
-                    aria-label="Visit our YouTube channel"
-                >
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
+                    href="intake-form.html" 
+                    class="inline-block bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition-colors">
+                    Get Started
                 </a>
             </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; <span id="year"></span> Negroar Resilience. All rights reserved.</p>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<script>
-    // Dynamically update the year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <!-- Scripts -->
+    <script>
+        // Dynamically update the year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Form submission handling
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Add your form submission logic here
-    });
+        // Populate Community Cards Dynamically
+        async function loadCommunity() {
+            const communityData = [
+                {
+                    "name": "Vending.com",
+                    "description": "Innovative vending solutions provider.",
+                    "url": "https://www.vending.com",
+                    "image": "https://via.placeholder.com/300x200?text=Vending.com"
+                },
+                {
+                    "name": "FoodPro Inc.",
+                    "description": "Specialists in catering equipment.",
+                    "url": "https://www.foodproinc.com",
+                    "image": "https://via.placeholder.com/300x200?text=FoodPro+Inc."
+                },
+                {
+                    "name": "Culinary Hub",
+                    "description": "Your go-to resource for food startups.",
+                    "url": "https://www.culinaryhub.com",
+                    "image": "https://via.placeholder.com/300x200?text=Culinary+Hub"
+                }
+            ];
 
-    // Video background fallback
-    document.querySelector('video').addEventListener('error', function(e) {
-        this.style.display = 'none';
-        document.querySelector('.video-content').style.background = 'linear-gradient(to right, #4C1D95, #1E40AF)';
-    });
-</script>
+            const container = document.getElementById('community-cards');
+            communityData.forEach(company => {
+                const card = document.createElement('div');
+                card.className = 'card bg-white rounded-lg shadow-lg p-6';
+                card.innerHTML = `
+                    <img src="${company.image}" alt="${company.name}" class="w-full h-40 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">${company.name}</h3>
+                    <p class="text-gray-600 mb-4">${company.description}</p>
+                    <a href="${company.url}" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:text-purple-800">
+                        Visit Website
+                    </a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Call the function on page load
+        document.addEventListener('DOMContentLoaded', loadCommunity);
+    </script>
 </body>
 </html>
