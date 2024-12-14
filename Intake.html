@@ -3,160 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Business Intake</title>
+    <meta name="description" content="Join the Negroar Resilience Program - Business Registration Form">
+    <title>Business Registration - Negroar Resilience</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f9fafb;
-        }
-    </style>
 </head>
-<body>
+<body class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center text-purple-600 hover:text-purple-700">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header -->
-    <header class="bg-purple-600 text-white py-6">
-        <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold">New Business Intake</h1>
-            <p class="mt-2">Submit your details to join the Negroar Resilience Program</p>
+    <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">Join Our Community</h1>
+            <p class="text-xl max-w-2xl mx-auto">Take the first step towards growing your business with Negroar Resilience</p>
         </div>
     </header>
 
+    <!-- Progress Indicator -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <div class="relative flex-1">
+                    <div class="h-1 bg-purple-600 absolute left-0 top-1/2 transform -translate-y-1/2 w-full"></div>
+                    <div class="relative flex justify-between">
+                        <div class="step-1 bg-purple-600 rounded-full h-8 w-8 flex items-center justify-center text-white font-bold">1</div>
+                        <div class="step-2 bg-gray-300 rounded-full h-8 w-8 flex items-center justify-center text-gray-600 font-bold">2</div>
+                        <div class="step-3 bg-gray-300 rounded-full h-8 w-8 flex items-center justify-center text-gray-600 font-bold">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Form Section -->
-    <main class="container mx-auto px-6 py-12">
-        <section class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-semibold mb-6">Business Registration Form</h2>
-            <form id="business-intake-form" class="space-y-6">
-                <!-- Business Name -->
-                <div>
-                    <label for="business-name" class="block text-sm font-medium text-gray-700">Business Name</label>
-                    <input 
-                        type="text" 
-                        id="business-name" 
-                        name="business_name" 
-                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
-                        required>
-                </div>
+    <main class="container mx-auto px-6 pb-16">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Business Information</h2>
+                    <form id="business-intake-form" class="space-y-6">
+                        <!-- Business Details Section -->
+                        <div class="space-y-6 p-6 bg-gray-50 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-700">Basic Details</h3>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="business-name" class="block text-sm font-medium text-gray-700">Business Name *</label>
+                                    <input 
+                                        type="text" 
+                                        id="business-name" 
+                                        name="business_name" 
+                                        class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
+                                        required
+                                        aria-required="true">
+                                </div>
 
-                <!-- Contact Name -->
-                <div>
-                    <label for="contact-name" class="block text-sm font-medium text-gray-700">Contact Person</label>
-                    <input 
-                        type="text" 
-                        id="contact-name" 
-                        name="contact_name" 
-                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
-                        required>
-                </div>
+                                <div>
+                                    <label for="business-type" class="block text-sm font-medium text-gray-700">Business Type *</label>
+                                    <select 
+                                        id="business-type" 
+                                        name="business_type" 
+                                        class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        required
+                                        aria-required="true">
+                                        <option value="">Select a type</option>
+                                        <option value="restaurant">Restaurant</option>
+                                        <option value="catering">Catering</option>
+                                        <option value="food_truck">Food Truck</option>
+                                        <option value="bakery">Bakery</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- Email Address -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
-                        required>
-                </div>
+                        <!-- Contact Information Section -->
+                        <div class="space-y-6 p-6 bg-gray-50 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-700">Contact Information</h3>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="contact-name" class="block text-sm font-medium text-gray-700">Full Name *</label>
+                                    <input 
+                                        type="text" 
+                                        id="contact-name" 
+                                        name="contact_name" 
+                                        class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
+                                        required
+                                        aria-required="true">
+                                </div>
 
-                <!-- Phone Number -->
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                    <input 
-                        type="tel" 
-                        id="phone" 
-                        name="phone" 
-                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" 
-                        required>
-                </div>
+                                <div>
+                                    <label for="role" class="block text-sm font-medium text-gray-700">Role in Business *</label>
+                                    <input 
+                                        type="text" 
+                                        id="role" 
+                                        name="role" 
+                                        class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
+                                        required
+                                        aria-required="true">
+                                </div>
 
-                <!-- Business Registration Status -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Are you a registered business?</label>
-                    <div class="mt-2 space-y-2">
-                        <label class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="registered_business" 
-                                value="yes" 
-                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500" 
-                                required>
-                            <span class="ml-2 text-gray-700">Yes</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="registered_business" 
-                                value="no" 
-                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500">
-                            <span class="ml-2 text-gray-700">No</span>
-                        </label>
-                    </div>
-                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address *</label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
+                                        required
+                                        aria-required="true"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                </div>
 
-                <!-- Insurance Status -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Do you have business insurance?</label>
-                    <div class="mt-2 space-y-2">
-                        <label class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="insurance_status" 
-                                value="yes" 
-                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500" 
-                                required>
-                            <span class="ml-2 text-gray-700">Yes</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="insurance_status" 
-                                value="no" 
-                                class="form-radio text-purple-600 border-gray-300 focus:ring-purple-500">
-                            <span class="ml-2 text-gray-700">No</span>
-                        </label>
-                    </div>
-                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number *</label>
+                                    <input 
+                                        type="tel" 
+                                        id="phone" 
+                                        name="phone" 
+                                        class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
+                                        required
+                                        aria-required="true"
+                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                        placeholder="xxx-xxx-xxxx">
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- Additional Details -->
-                <div>
-                    <label for="additional-details" class="block text-sm font-medium text-gray-700">Additional Information</label>
-                    <textarea 
-                        id="additional-details" 
-                        name="additional_details" 
-                        rows="4" 
-                        class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
-                        placeholder="Tell us more about your business, needs, and goals."
-                        required></textarea>
-                </div>
+                        <!-- Business Status Section -->
+                        <div class="space-y-6 p-6 bg-gray-50 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-700">Business Status</h3>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <fieldset>
+                                        <legend class="block text-sm font-medium text-gray-700 mb-2">Business Registration Status *</legend>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input 
+                                                    type="radio" 
+                                                    name="registered_business" 
+                                                    value="yes" 
+                                                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300" 
+                                                    required>
+                                                <span class="ml-2 text-gray-700">Registered Business</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input 
+                                                    type="radio" 
+                                                    name="registered_business" 
+                                                    value="no" 
+                                                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300">
+                                                <span class="ml-2 text-gray-700">Not Yet Registered</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
 
-                <!-- Submit Button -->
-                <div>
-                    <button 
-                        type="submit" 
-                        class="w-full bg-purple-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-                        Submit Application
-                    </button>
+                                <div>
+                                    <fieldset>
+                                        <legend class="block text-sm font-medium text-gray-700 mb-2">Insurance Status *</legend>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input 
+                                                    type="radio" 
+                                                    name="insurance_status" 
+                                                    value="yes" 
+                                                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300" 
+                                                    required>
+                                                <span class="ml-2 text-gray-700">Have Insurance</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input 
+                                                    type="radio" 
+                                                    name="insurance_status" 
+                                                    value="no" 
+                                                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300">
+                                                <span class="ml-2 text-gray-700">Need Insurance</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="space-y-6 p-6 bg-gray-50 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-700">Additional Information</h3>
+                            
+                            <div>
+                                <label for="goals" class="block text-sm font-medium text-gray-700">Business Goals *</label>
+                                <textarea 
+                                    id="goals" 
+                                    name="goals" 
+                                    rows="4" 
+                                    class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    placeholder="Tell us about your business goals and what you hope to achieve with our program."
+                                    required
+                                    aria-required="true"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="support-needed" class="block text-sm font-medium text-gray-700">Support Needed</label>
+                                <div class="mt-2 space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="support_needed[]" value="kitchen" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                        <span class="ml-2 text-gray-700">Commercial Kitchen Access</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="support_needed[]" value="mentorship" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                        <span class="ml-2 text-gray-700">Business Mentorship</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="support_needed[]" value="funding" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                        <span class="ml-2 text-gray-700">Funding Assistance</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="support_needed[]" value="marketing" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                        <span class="ml-2 text-gray-700">Marketing Support</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex justify-end space-x-4">
+                            <button 
+                                type="button"
+                                class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                onclick="window.location.href='index.html'">
+                                Cancel
+                            </button>
+                            <button 
+                                type="submit" 
+                                class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                Submit Application
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </section>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-4 text-center">
-            <p>&copy; <span id="year"></span> Negroar Resilience. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; <span id="year"></span> Negroar Resilience. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                <a href="#" class="text-gray-300 hover:text-white mx-2">Privacy Policy</a>
+                    <a href="#" class="text-gray-300 hover:text-white mx-2">Terms of Service</a>
+                    <a href="#" class="text-gray-300 hover:text-white mx-2">Contact Support</a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-lg bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">Application Submitted!</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        Thank you for your interest in Negroar Resilience. We'll review your application and contact you within 2-3 business days.
+                    </p>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="close-modal" class="px-4 py-2 bg-purple-600 text-white text-base font-medium rounded-lg w-full shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Dynamically update the year
+        // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Form submission handling
-        document.getElementById('business-intake-form').addEventListener('submit', function (e) {
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : !x[3] ? x[1] + '-' + x[2] : x[1] + '-' + x[2] + '-' + x[3];
+        });
+
+        // Form validation and submission
+        document.getElementById('business-intake-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for submitting your application. We will review your details and get back to you soon.');
-            this.reset(); // Reset form fields
+            
+            // Basic form validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.classList.add('border-red-500');
+                    
+                    // Add error message if it doesn't exist
+                    if (!field.nextElementSibling?.classList.contains('error-message')) {
+                        const errorMessage = document.createElement('p');
+                        errorMessage.className = 'error-message text-red-500 text-sm mt-1';
+                        errorMessage.textContent = 'This field is required';
+                        field.parentNode.insertBefore(errorMessage, field.nextSibling);
+                    }
+                } else {
+                    field.classList.remove('border-red-500');
+                    const errorMessage = field.nextElementSibling;
+                    if (errorMessage?.classList.contains('error-message')) {
+                        errorMessage.remove();
+                    }
+                }
+            });
+
+            // Email validation
+            const emailField = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailField.value)) {
+                isValid = false;
+                emailField.classList.add('border-red-500');
+                if (!emailField.nextElementSibling?.classList.contains('error-message')) {
+                    const errorMessage = document.createElement('p');
+                    errorMessage.className = 'error-message text-red-500 text-sm mt-1';
+                    errorMessage.textContent = 'Please enter a valid email address';
+                    emailField.parentNode.insertBefore(errorMessage, emailField.nextSibling);
+                }
+            }
+
+            // Phone validation
+            const phoneField = document.getElementById('phone');
+            const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+            if (!phoneRegex.test(phoneField.value)) {
+                isValid = false;
+                phoneField.classList.add('border-red-500');
+                if (!phoneField.nextElementSibling?.classList.contains('error-message')) {
+                    const errorMessage = document.createElement('p');
+                    errorMessage.className = 'error-message text-red-500 text-sm mt-1';
+                    errorMessage.textContent = 'Please enter a valid phone number (XXX-XXX-XXXX)';
+                    phoneField.parentNode.insertBefore(errorMessage, phoneField.nextSibling);
+                }
+            }
+
+            if (isValid) {
+                // Show success modal
+                document.getElementById('success-modal').classList.remove('hidden');
+                
+                // Reset form
+                this.reset();
+                
+                // Remove any remaining error states
+                document.querySelectorAll('.error-message').forEach(msg => msg.remove());
+                document.querySelectorAll('.border-red-500').forEach(field => {
+                    field.classList.remove('border-red-500');
+                });
+            }
+        });
+
+        // Close modal handler
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('success-modal').classList.add('hidden');
+            window.location.href = 'index.html'; // Redirect to home page
+        });
+
+        // Remove error styling on input
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', function() {
+                this.classList.remove('border-red-500');
+                const errorMessage = this.nextElementSibling;
+                if (errorMessage?.classList.contains('error-message')) {
+                    errorMessage.remove();
+                }
+            });
+        });
+
+        // Prevent form submission on enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
         });
     </script>
 </body>
